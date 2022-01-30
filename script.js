@@ -12,37 +12,35 @@ function computerPlay() {
         return "scissors";
 };
 
-let playerRoundScore = 0;
-let computerRoundScore = 0;
 let playerScore = 0;
 let computerScore = 0;
 
 function playRound(playerSelection, computerSelection) {
 
-    let playerDraw = `You chose ${playerSelection}. Computer chose ${computerSelection}. The game is a draw!`;
-    let playerWin = `You chose ${playerSelection}. Computer chose ${computerSelection}. You win!`;
-    let playerLose = `You chose ${playerSelection}. Computer chose ${computerSelection}. You lose!`;
+    let playerDraw = `You chose ${playerSelection}. Computer chose ${computerSelection}. The round is a draw!`;
+    let playerWin = `You chose ${playerSelection}. Computer chose ${computerSelection}. You win this round!`;
+    let playerLose = `You chose ${playerSelection}. Computer chose ${computerSelection}. You lose this round!`;
 
 
     if (playerSelection === computerSelection) {
         console.log(playerDraw);
-        return playerDraw;
+        console.log(`Your score is ${playerScore} and computer is ${computerScore}`);
     }
     else if ((playerSelection === "rock" && computerSelection === "paper") || 
              (playerSelection === "scissors" && computerSelection === "rock") || 
              (playerSelection === "paper" && computerSelection === "scissors")) {
-                 computerRoundScore == 1;
+                 ++computerScore;
                  console.log(playerLose);
-                 return playerLose;
+                 console.log(`Your score is ${playerScore} and computer is ${computerScore}`);
              }
     
     //add another else if for playerWin
     else if ((playerSelection === "rock" && computerSelection === "scissors") ||
              (playerSelection === "scissors" && computerSelection === "paper") ||
              (playerSelection === "paper" && computerSelection === "rock")) {
-                 playerRoundScore == 1;
+                 ++playerScore;
                  console.log(playerWin);
-                 return playerWin;
+                 console.log(`Your score is ${playerScore} and computer is ${computerScore}`);
              }
     else //else is if input is not a rock, paper, or scissors
              console.log("Invalid input. Please try again.");
@@ -57,13 +55,13 @@ function game() {
     return;
 }
 
-for (let i = 1; i <= 5; i++) {
+for (let i = 1; i <= 20; i++) {
     game();
-    if (playerRoundScore == 1) {
-        playerScore = playerScore + 1;
-        console.log(`Player score is ${playerScore}`);
-    } else if (computerRoundScore == 1) {
-        computerScore = computerScore + 1;
-        console.log(`Computer score is ${computerScore}`);
+    if (playerScore == 5 && computerScore < 5) {
+        console.log(`Score reached. You win!`);
+        break;
+    } else if (computerScore == 5 && playerScore < 5) {
+        console.log(`Score reached. Computer win!`);
+        break;
     }
 };
