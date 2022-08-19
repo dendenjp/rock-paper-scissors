@@ -138,7 +138,6 @@ function checkWinner() {
             {
                 label: 'Yes!',
                 onClick: () => {
-                    console.log('OO. The button was click');
                     resultContainer.classList.add('--hidden');
                     playerScoreEl.textContent = 0;
                     playerScore = 0;
@@ -179,8 +178,6 @@ function resetPage() {
     resultContainer.classList.add('--visible');
     resultContainer.addEventListener('transitionend', function () {
         resultContainer.classList.remove('--visible');
-
-        console.log('reset!');
     });
 }
 
