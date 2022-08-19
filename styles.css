@@ -27,7 +27,7 @@ body {
 }
 
 .grid-container {
-    gap: 8rem;
+    gap: 6rem;
     margin-top: 3rem;
 
     justify-content: center;
@@ -35,7 +35,7 @@ body {
     /* height: auto;
     width: auto; */
     display: grid;
-    grid-template-rows: 1fr 1fr 2fr 2fr 2fr;
+    grid-template-rows: 1fr 3fr 2fr 2fr 2fr;
     grid-template-columns: 1fr;
 }
 
@@ -45,7 +45,7 @@ body {
 
 .score {
     display: flex;
-    gap: 1rem;
+
     /* flex-direction: column; */
     justify-content: space-evenly;
     align-items: center;
@@ -56,7 +56,7 @@ body {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    height: 1rem;
+    height: 10rem;
     width: auto;
     /* border: solid yellow 0.2rem; */
 }
@@ -123,4 +123,91 @@ body {
     color: black;
     background: white;
     transition: all 300ms;
+}
+
+/* MODAL WINDOW */
+.modal {
+    --gap: 15px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: var(--gap);
+    background: rgba(0, 0, 0, 0.5);
+    color: black;
+}
+
+.modal__inner {
+    background: #fff;
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.modal__top {
+    /* display: flex;
+    align-items: center; */
+    background-color: #eeeeee;
+}
+
+.modal__title {
+    padding: var(--gap);
+    font-size: 20px;
+    text-align: center;
+}
+
+.modal__close {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: var(--gap);
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.modal__content {
+    padding: 50px;
+    line-height: 1.5;
+}
+
+.modal__bottom {
+    text-align: right;
+    padding: 0 var(--gap) var(--gap) var(--gap);
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+
+    /* gap: 50px; */
+}
+
+.modal__button {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #fff;
+    color: black;
+    border: solid 3px black;
+    outline: none;
+    border-radius: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font: inherit;
+    border-radius: 3px;
+
+    width: autopx;
+    height: 40px;
+
+    margin-left: 25px;
+}
+
+.modal__button:hover {
+    background-color: black;
+    color: #fff;
 }

@@ -18,6 +18,63 @@ btnRock.value = 'rock';
 btnPaper.value = 'paper';
 btnScissors.value = 'scissors';
 
+function showModal(titleHtml, contentHtml, buttons) {
+    const modal = document.createElement('div');
+
+    modal.classList.add('modal');
+    modal.innerHTML = `
+    <div class="modal__inner">
+                <div class="modal__top">
+                    <div class="modal__title">${titleHtml}</div>
+                    
+                </div>
+                <div class="modal__content">
+                    ${contentHtml}
+                </div>
+                <div class="modal__bottom">
+                </div>
+            </div>
+    `;
+
+    for (const button of buttons) {
+        const element = document.createElement('button');
+
+        element.setAttribute('type', 'button');
+        element.classList.add('modal__button');
+        element.textContent = button.label;
+        element.addEventListener('click', () => {
+            if (button.triggerClose) {
+                document.body.removeChild(modal);
+            }
+
+            button.onClick(modal);
+        });
+
+        modal.querySelector('.modal__bottom').appendChild(element);
+    }
+
+    document.body.appendChild(modal);
+}
+
+/* 
+showModal('You win!', [
+    {
+        label: 'Yes!',
+        onClick: () => {
+            console.log('OO. The button was click');
+        },
+        triggerClose: true,
+    },
+    {
+        label: 'No!',
+        onClick: (modal) => {
+            console.log('HINDI DAW.');
+        },
+        triggerClose: true,
+    },
+]);
+ */
+
 function computerPlay() {
     let rng = Math.floor(Math.random() * 3);
     if (rng === 1) {
@@ -68,7 +125,54 @@ function playRound(playerSelection, computerSelection) {
     } //else is if input is not a rock, paper, or scissors
     else console.log('Invalid input. Please try again.');
 
-    if (playerScore === 5 || computerScore === 5) console.log('GAME ENDS!');
+    checkWinner();
+}
+
+function checkWinner() {
+    if (playerScore === 5 || computerScore === 5) {
+        const titleHtmlText = function () {
+            if (playerScore === 5) return 'Score limit reached. You win!';
+            if (computerScore === 5) return 'Score limit reached. You lose!';
+        };
+        showModal(titleHtmlText(), '<p>Would you like to play again?</p>', [
+            {
+                label: 'Yes!',
+                onClick: () => {
+                    console.log('OO. The button was click');
+                    resultContainer.classList.add('--hidden');
+                    playerScoreEl.textContent = 0;
+                    playerScore = 0;
+                    computerScoreEl.textContent = 0;
+                    computerScore = 0;
+                },
+                triggerClose: true,
+            },
+            {
+                label: 'No!',
+                onClick: () => {
+                    showModal('', '<p>Thanks for playing!</p>', [
+                        {
+                            label: 'Ok',
+                            onClick: () => {
+                                document.addEventListener(
+                                    'click',
+                                    handler,
+                                    true
+                                );
+
+                                function handler(e) {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                }
+                            },
+                            triggerClose: true,
+                        },
+                    ]);
+                },
+                triggerClose: true,
+            },
+        ]);
+    }
 }
 
 function resetPage() {
